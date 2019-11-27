@@ -1,0 +1,8 @@
+prefix=/home/intel/catkin_ws/install
+
+Name: read_param_test
+Description: Description of read_param_test
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/intel/catkin_ws/install/lib 
+Requires: 
