@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<robot name="mnm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <link name="base_link">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <box size="1 1 1"/>
+            </geometry>
+        </visual>
+    </link>
+    <joint name="base_link_to_link_01" type="revolute">
+        <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+        <!-- let me explain these two lines above(12 and 13)
+        <axis xyz="0 0 1" />
+        <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+        because it's a revolute joint,so the axis means it can routate around z axis,
+        and the 3.14 means 180 degree
+        -->
+        <origin rpy="0 0 0" xyz="0 0 0.5"/>
+        <!-- and why the  xyz ="0 0 0.5" 
+        because the base_link 's origin is "0 0 0",and the height is 1,so the top of it is 0.5
+        -->
+        <parent link="base_link" />
+        <child link="link_01"/>
+    </joint>
+    <link name="link_01">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0.2" />
+            <geometry>
+                <cylinder radius="0.35" length="0.4" />
+            </geometry>
+        </visual>
+    </link>
+
+</robot>
