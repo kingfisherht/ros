@@ -1,0 +1,49 @@
+学习写urdf有几个地方需要注意：
+
+1. 一定要记住它使用的是右手坐标系。
+    x正方向朝左， y 正方向向内， z轴正方向朝上
+2. 构建树结构， 即写link和joint
+3. 每个link的参考坐标系都在它的底部，并与关节的参考坐标系正交，为了添加尺寸，需要指定偏移从一个link到它的关节的子link, 这通过添加origin到每个节点解决。
+   这么说origin表示的是关节相对于父关节的距离和旋转， xyz和rpy
+
+
+<joint name="joint1" type="fixed">
+    <parent link="base_link"/>
+    <child link="link2" />
+</joint>
+说明： 
+type="fixed" 才能显示图片 (必须指定)
+type(必需的)
+指定joint的类型，有下列选项
+    revolute - 可以绕着一个轴旋转的铰链关节，有最大值和最小值限制。
+    continuous - 连续型的铰链关节，可以绕一个轴旋转，没有最大值和最小值限制。
+    prismatic - 滑动关节，可以沿着一个轴滑动，有最大值和最小值限制。
+    fixed - 这不是一个实际的关节，因为它无法运动，所有的自由度都被锁定。这种类型的关节不需要指定轴、动力学特征、标度和最大值最小值限制。
+    floating - 这是一个具有6个自由度的关节
+    planar - 此关节在一个平面内运动，垂线是运动轴
+
+<origin> (可选，defaults to identity if not specified)
+    相对于连杆的坐标系的几何形状坐标系。
+    xyz (optional: defaults to zero vector)
+        表示x,y,z
+    x,y,z 方向的偏置，单位为米。
+    rpy (optional: defaults to identity if not specified)
+        表示坐标轴在RPY方向上的旋转，单位为弧度。
+<box>
+    矩形，元素包含长、宽、高。原点在中心。
+
+<cylinder>
+-圆柱体，元素包含半径、长度。原点中心
+
+<sphere>
+    球体，元素包含半径。原点在中心。
+
+<mesh>
+    网格，由文件决定，同时提供 scale ，用于界定其边界。推荐使用 Collada .dae 文件， 也支持.stl文件，但必须为一个本地文件。
+
+<material> (可选)
+    可视化组件的材料。可以在link标签外定义，但必需在robot标签内，在link标签外定义时，需引用link的名字。
+    <color>(可选)
+        颜色，由 red/green/blue/alpha 组成，大小范围在 [0,1] 内。
+    <texture>(可选)
+        材料属性，由文件定义
