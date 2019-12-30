@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<robot name="daolibai">
+    <link name="world" />
+    <joint name="base_link_1_joint" type="fixed">
+        <parent link="world" />
+        <child  link ="base_link_1" />
+        <origin xyz="0 0 1" 
+                rpy="0 0 0 " />
+    </joint>
+    <link name="base_link_1">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="./meshes/base_1.stl" />
+          </geometry>
+          <material name="base_link_1_color" value="0.46 0.42 0.50 1.0">
+            <color rgba="0 0 0"/>
+          </material>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="package://intel_pendulum_description/meshes/base_1.stl" />
+          </geometry>
+        </collision>
+        <gazebo reference="base_link_1"><material>Gazebo/Grey</material></gazebo>
+    </link>
+    <joint name="slider_link_1_joint" type="prismatic">
+        <parent link="base_link_1" />
+        <child  link ="slider_link_1" />
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <axis xyz="0 1 0"/>
+        <limit lower="-0.4" upper="0.4" effort="1" velocity="1"/>
+    </joint>
+    <link name="slider_link_1">
+        <visual>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="package://intel_pendulum_description/meshes/slider_1_new.stl" />
+          </geometry>
+          <material name="slider_link_1_color" value="0.78 0.73 0.50 1.0">
+            <color rgba="0 0 0"/>
+          </material>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="package://intel_pendulum_description/meshes/slider_1_new.stl" />
+          </geometry>
+        </collision>
+    </link>
+    <joint name="swing_link_1_joint" type="continuous">
+          <parent link="slider_link_1" />
+          <child  link ="swing_link_1" />
+          <origin xyz="0 0 0.06" rpy="${-3.14/2} 0 0" />
+          <axis xyz="1 0 0"/>
+          <limit effort="1" velocity="1"/>
+    </joint> 
+    <link name="swing_link_1">
+        <visual>
+          <origin xyz="0 0 -0.060" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="package://intel_pendulum_description/meshes/swing_new.stl" />
+          </geometry>
+          <material name="swing_link_1_color">
+            <color rgba="0.15 0.96 0.80 1.0"/>
+          </material>
+        </visual>
+        <collision>
+          <origin xyz="0 0 -0.060" rpy="0 0 0"/>
+          <geometry>
+            <mesh filename="package://intel_pendulum_description/meshes/swing_new.stl" />
+          </geometry>
+        </collision>
+        <gazebo reference="swing_link_1"><material>Gazebo/Grey</material></gazebo>
+    </link>
+</robot>
