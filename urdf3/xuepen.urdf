@@ -1,21 +1,22 @@
 <?xml version="1.0"?>
 <robot name="xuepen_robot">
     <link name="base_link" >
-        <material name="blue" >
-            <color rgba="0 0 0.8 0.6" />
-        </material>
         <visual>
             <geometry>
                 <box size="0.1 0.1 0.6"/>
             </geometry>
+            <material name="blue" >
+                <color rgba="0 0 0.8 0.6" />
+            </material>
+            <origin rpy="0 0 0" xyz="0 0 0"/>       
         </visual>
     </link>
     <joint name="joint1" type="revolute">
         <parent link="base_link"/>
         <child link="link2" />
-        <origin rpy="0 0 0" xyz="0 0 .35"/>
-        <axis xyz="1 0 0"/>
-        <limit effort="1000.0" lower="0.0" upper="0.548" velocity="0.5"/>
+        <origin rpy="0 1.57 0" xyz="0 0 .35"/>
+        <axis xyz="0 1 0"/>
+        <limit effort="6.28" lower="0.0" upper="6.28" velocity="0.5"/>
      </joint>
     <link name="link2" >
         <visual>
@@ -34,6 +35,7 @@
             <geometry>
                  <box size="0.1 0.1 0.6"/>
             </geometry>
+            <origin rpy="0 0 0" xyz="0.0 0 0"/> 
          </visual>
     </link>
 </robot>
